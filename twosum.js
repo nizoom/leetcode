@@ -1,49 +1,32 @@
 function twoSum (nums, target) {
 
-    let finalIndexes = []
+//   matching pair = target = firstNum
+    let finalPair;
 
-    const lastIndex = nums.length - 1;
-    
-    nums.forEach((num, index) => {
-        
-        // try every next number 
+    for(let i = 0 ; i < nums.length ; i++ ){
+        const matchingPair = target -  nums[i];
+        const arrCopyWithElRemoved = [...nums];
+        arrCopyWithElRemoved.splice(i, 1);
 
-        let selectingBPosition = nums.indexOf(num) === 0 ? 1 : 0 ; // can't land on the current index of num / has to skip it! 
-
-        while(selectingBPosition <= lastIndex && finalIndexes.length < 1){
-
-            selectingBPosition === index ? selectingBPosition ++ : selectingBPosition;
-
-            if(testCombo(num, nums[selectingBPosition])){
-
-                // console.log(num, nums[selectingBPosition])
-
-                finalIndexes.push(index, selectingBPosition)
-
-                break;
-                
-            }  else {
-                selectingBPosition++
-            }         
-
+        if(arrCopyWithElRemoved.includes(matchingPair)){
+            console.log(i)
+            finalPair = [i, arrCopyWithElRemoved.indexOf(matchingPair) + 1]
+            i += 100
+          
         }
-     
-    })
+    }   
 
-    console.log(finalIndexes)
-
-    function testCombo(a, b){
-      console.log('fired');
-       return a + b === target
-    }
-
-    return finalIndexes;
+    console.log(finalPair)
+    return finalPair
 };
 
-twoSum([3,2,3], 6)
+
+twoSum([3,2,3,4,6,7], 11)
 
 
-
+// let testArr = [1,2,3,4,5]
+// testArr.splice(1, 1)
+// console.log(testArr)
 
 
 
